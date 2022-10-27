@@ -1,12 +1,13 @@
 package dad.scenebuilder;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Model {
     
-    public SimpleStringProperty pantalla = new SimpleStringProperty();
+    private StringProperty pantalla = new SimpleStringProperty();
 
-    public final SimpleStringProperty pantallaProperty() {
+    public final StringProperty pantallaProperty() {
 		return this.pantalla;
 	}
 	
@@ -17,5 +18,7 @@ public class Model {
 	public final void setPantalla(final String pantalla) {
 		this.pantallaProperty().set(pantalla);
 	}
+
+	
     
 }

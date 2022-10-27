@@ -1,7 +1,7 @@
 package dad.scenebuilder;
 
 /**
- * Implementacion de la logica de una calculadora.
+ * Implementaci�n de la l�gica de una calculadora.
  * @author Fran Vargas
  */
 public class Calculadora {
@@ -32,7 +32,7 @@ public class Calculadora {
 	}
 
 	/**
-	 * Inicializa por completo la calculadora, borrando la informacion que tiene memorizada y la pantalla.
+	 * Inicializa por completo la calculadora, borrando la informaci�n que tiene memorizada y la pantalla.
 	 */
 	public void borrar() {
 		operando = 0.0;
@@ -41,7 +41,7 @@ public class Calculadora {
 	}
 	
 	/**
-	 * Borra lo que hay en la pantalla (el ultimo operando introducido).
+	 * Borra lo que hay en la pantalla (el �ltimo operando introducido).
 	 */
 	public void borrarTodo() {
 		nuevoOperando = true;
@@ -49,13 +49,13 @@ public class Calculadora {
 	}
 	
 	/**
-	 * Indica a la calculadora que realice la operacion indicada. 
-	 * @param operador Operacion a realizar; usar una constante: IGUAL, SUMAR, RESTAR, MULTIPLCIAR, DIVIDIR.
+	 * Indica a la calculadora que realice la operaci�n indicada. 
+	 * @param operador Operaci�n a realizar; usar una constante: IGUAL, SUMAR, RESTAR, MULTIPLCIAR, DIVIDIR.
 	 */
 	public void operar(char operador) {
 		nuevoOperando = true;
 		double operando2 = Double.parseDouble(pantalla);
-		switch (operador) {
+		switch (this.operador) {
 			case SUMAR: operando += operando2; break;
 			case RESTAR: operando -= operando2; break;
 			case MULTIPLICAR: operando *= operando2; break;
@@ -63,7 +63,7 @@ public class Calculadora {
 			case IGUAL: operando = operando2; break;
 		}
 		this.operador = operador;
-		this.pantalla = "" + operando;
+		pantalla = "" + operando;
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class Calculadora {
 	}
 	
 	/**
-	 * Inserta un digito en el operando actual (pantalla).
+	 * Inserta un d�gito en el operando actual (pantalla).
 	 * @param digito Digito a introducir en la pantalla.
 	 */
 	public void insertar(char digito) {
