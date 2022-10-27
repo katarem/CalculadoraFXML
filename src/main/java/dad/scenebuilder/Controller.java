@@ -2,13 +2,22 @@ package dad.scenebuilder;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.Action;
+
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class Controller implements Initializable{
@@ -37,42 +46,32 @@ public class Controller implements Initializable{
         //Bindings
         model.pantalla.bind(pantallaField.textProperty());
 
-        //EventListeners
-        igualButton.setOnAction(e -> calcular('='));
-        sumarButton.setOnAction(e -> calcular('+'));
-        restarButton.setOnAction(e -> calcular('-'));
-        multiplicarButton.setOnAction(e -> calcular('*'));
-        dividirButton.setOnAction(e -> calcular('/'));
-        cButton.setOnAction(e -> calcular('c'));
-        ceButton.setOnAction(e -> calcular('e'));
-        comaButton.setOnAction(e -> calcular(','));
-        button0.setOnAction(e -> calcular('0'));
-        button1.setOnAction(e -> calcular('1'));
-        button3.setOnAction(e -> calcular('3'));
-        button4.setOnAction(e -> calcular('4'));
-        button5.setOnAction(e -> calcular('5'));
-        button2.setOnAction(e -> calcular('2'));
-        button6.setOnAction(e -> calcular('6'));
-        button7.setOnAction(e -> calcular('7'));
-        button8.setOnAction(e -> calcular('8'));
-        button9.setOnAction(e -> calcular('9'));
+        //Manejador de evento (click de boton)
+        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+            
+            public void handle(ActionEvent e) {
+                if(e.getSource()==cButton)
+                    calc.borrar();
+                else if(e.getSource()==ceButton)
+                    calc.borrarTodo();
+                else if(e.getSource()==comaButton)
+                    calc.insertarComa();
+                else if(e.getSource()==sumarButton || e.getSource()==restarButton || e.getSource()==multiplicarButton || e.getSource()==dividirButton || e.getSource()==igualButton)
+                    calc.operar(e.toString().charAt(0));
+                else
+                    calc.insertar(e.toString().charAt(0));
+                pantallaField.setText(calc.getPantalla());
+            }
+    };
+
+    //Agrupamos botones y añadimos evento a disparar + manejador de evento.
+    Group g = new Group(cButton,ceButton,comaButton,sumarButton,restarButton,multiplicarButton,dividirButton,igualButton,button0,button1,button2,button3,button4,button5,button6,button7,button8,button9);
+    g.addEventFilter(ActionEvent.ACTION, buttonHandler);
+
 
     }
     public GridPane getView(){
         return view;
-    }
-    private void calcular(char a){
-        if(a=='c')
-            calc.borrar();
-        else if(a=='e')
-            calc.borrarTodo();
-        else if(a==',')
-            calc.insertarComa();
-        else if(Character.isDigit(a))
-            calc.insertar(a);
-        else
-            calc.operar(a);
-        pantallaField.setText(calc.getPantalla());
     }
 
     @Override
